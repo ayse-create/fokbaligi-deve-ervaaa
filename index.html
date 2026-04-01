@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="tr" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sevimli Aşk Mesajı</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&amp;family=Nunito:wght@700;800&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='90' text-anchor='middle' x='50'>💖</text></svg>" type="image/svg+xml">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.22), transparent 20%),
+        radial-gradient(circle at 80% 15%, rgba(255, 192, 203, 0.18), transparent 18%),
+        radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.14), transparent 25%),
+        linear-gradient(135deg, #ff4fa1 0%, #ff7cc8 45%, #ffb0da 100%);
+      font-family: "Nunito", sans-serif;
+    }
+
+    .app-shell {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5%;
+    }
+
+    .floating-hearts {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -10%;
+      color: rgba(255,255,255,0.78);
+      animation-name: floatUp;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.45));
+      user-select: none;
+    }
+
+    .message-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px);
+      border: 2px solid rgba(255,255,255,0.28);
+      box-shadow:
+        0 12px 40px rgba(181, 22, 92, 0.28),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+      animation: softPop 1s ease-out;
+    }
+
+    .sparkle-row {
+      display: flex;
+      gap: 0.9rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+      color: #fff6fb;
+      opacity: 0.95;
+      text-shadow: 0 0 16px rgba(255,255,255,0.8);
+      font-size: 1.1rem;
+    }
+
+    .main-text {
+      font-family: "Pacifico", cursive;
+      color: #ffffff;
+      line-height: 1.25;
+      letter-spacing: 0.02em;
+      text-shadow:
+        0 0 6px rgba(255,255,255,0.95),
+        0 0 16px rgba(255,255,255,0.85),
+        0 0 30px rgba(255, 167, 212, 0.95),
+        0 0 52px rgba(255, 73, 157, 0.7);
+      animation: glowPulse 2.8s ease-in-out infinite;
+      word-break: break-word;
+    }
+
+    .little-note {
+      margin-top: 1.25rem;
+      color: rgba(255,255,255,0.95);
+      font-weight: 800;
+      text-shadow: 0 0 12px rgba(255,255,255,0.55);
+    }
+
+    .emoji-buddies {
+      margin-top: 1.4rem;
+      font-size: 2rem;
+      animation: bobbing 2.6s ease-in-out infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) scale(0.9);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.95;
+      }
+      100% {
+        transform: translateY(-1200%) translateX(40px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        transform: scale(1);
+        filter: brightness(1);
+      }
+      50% {
+        transform: scale(1.03);
+        filter: brightness(1.12);
+      }
+    }
+
+    @keyframes softPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.92) translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes bobbing {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .message-card {
+        padding: 2.2rem 1.25rem;
+        border-radius: 24px;
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body>
+  <main class="app-shell w-full h-full overflow-hidden" aria-label="Sevimli mesaj sayfası">
+   <div class="floating-hearts" id="floatingHearts" aria-hidden="true"></div>
+   <section class="message-card" aria-labelledby="mainMessageHeading">
+    <div class="sparkle-row">
+     <span>✨</span> <span>parlak tazılar</span> <span>✨</span>
+    </div>
+    <h1 id="mainMessageHeading" class="main-text text-4xl sm:text-5xl md:text-6xl lg:text-7xl">ervaaaa seni çok seviyorummm minik devecikk fok balığı seni çok seviyoğoo🦭🐪</h1>
+    <p class="little-note text-base sm:text-lg md:text-xl">Kalpler durmadan senin için uçuşuyor 💗</p>
+    <div class="emoji-buddies" aria-hidden="true">
+     🦭 💖 🐪
+    </div>
+   </section>
+  </main>
+  <script>
+    const defaultConfig = {
+      background_color: "#ff4fa1",
+      surface_color: "#ffffff",
+      text_color: "#ffffff",
+      primary_action_color: "#fff6fb",
+      secondary_action_color: "#ffd3e7",
+      font_family: "Pacifico",
+      font_size: 30,
+      main_message: "ervaaaa seni çok seviyorummm minik devecikk fok balığı seni çok seviyoğoo🦭🐪"
+    };
+
+    const mainMessageHeading = document.getElementById("mainMessageHeading");
+    const floatingHearts = document.getElementById("floatingHearts");
+    const messageCard = document.querySelector(".message-card");
+    const littleNote = document.querySelector(".little-note");
+    const sparkleRow = document.querySelector(".sparkle-row");
+
+    function applyBackground(color) {
+      document.body.style.background =
+        `radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.22), transparent 20%),
+         radial-gradient(circle at 80% 15%, rgba(255, 192, 203, 0.18), transparent 18%),
+         radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.14), transparent 25%),
+         linear-gradient(135deg, ${color} 0%, #ff7cc8 45%, #ffb0da 100%)`;
+    }
+
+    function buildHearts() {
+      floatingHearts.innerHTML = "";
+      const icons = ["💖", "💗", "💘", "💕", "💞", "💓", "💝"];
+      for (let i = 0; i < 26; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = icons[i % icons.length];
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.fontSize = (18 + Math.random() * 24) + "px";
+        heart.style.animationDuration = (7 + Math.random() * 7) + "s";
+        heart.style.animationDelay = (Math.random() * 8) + "s";
+        heart.style.opacity = 0.5 + Math.random() * 0.5;
+        floatingHearts.appendChild(heart);
+      }
+    }
+
+    async function onConfigChange(config) {
+      const merged = {
+        ...defaultConfig,
+        ...config
+      };
+
+      const baseSize = Number(merged.font_size) || defaultConfig.font_size;
+      mainMessageHeading.textContent = merged.main_message;
+      mainMessageHeading.style.color = merged.text_color;
+      mainMessageHeading.style.fontFamily = `${merged.font_family}, "Pacifico", cursive`;
+      mainMessageHeading.style.fontSize = `${baseSize * 2}px`;
+
+      littleNote.style.color = merged.primary_action_color;
+      littleNote.style.fontFamily = `"Nunito", sans-serif`;
+      littleNote.style.fontSize = `${baseSize * 0.62}px`;
+
+      sparkleRow.style.color = merged.primary_action_color;
+      sparkleRow.style.fontSize = `${baseSize * 0.5}px`;
+
+      messageCard.style.background = "rgba(255,255,255,0.14)";
+      messageCard.style.borderColor = merged.secondary_action_color;
+
+      applyBackground(merged.background_color);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => {
+                config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => {
+                config.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_message", config.main_message || defaultConfig.main_message]
+        ])
+      });
+    } else {
+      onConfigChange(defaultConfig);
+    }
+
+    buildHearts();
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e59b4bb6606c71b',t:'MTc3NTA2ODY1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
